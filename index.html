@@ -83,8 +83,9 @@ h2.sec-title{font-family:var(--display);font-weight:600;font-size:1.25rem;margin
 /* ---------- display tools ---------- */
 .cards{display:grid;gap:.9rem}
 .rolecards,.publist{display:grid;gap:.9rem}
-.card{background:#fff;border:1px solid var(--line);border-left:3px solid var(--c,var(--line));border-radius:var(--r);padding:1.1rem 1.3rem;transition:box-shadow .16s,transform .16s}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.1rem 1.3rem;transition:box-shadow .16s,transform .16s}
 .card:hover{box-shadow:0 8px 24px rgba(30,30,60,.07);transform:translateY(-1px)}
+.stack.edu .card:hover{box-shadow:none;transform:none}
 .stack .card:nth-child(3n+1){--c:var(--blue)}
 .stack .card:nth-child(3n+2){--c:var(--red)}
 .stack .card:nth-child(3n+3){--c:var(--yellow)}
@@ -103,7 +104,6 @@ h2.sec-title{font-family:var(--display);font-weight:600;font-size:1.25rem;margin
 .pubd{--c:var(--red)}
 
 /* role tools with no accent bar (e.g., Teaching and Outreach) */
-.rolecards.nobar .card{border-left:1px solid var(--line)}
 
 /* publications */
 .pub h3{margin-bottom:.3rem}
@@ -114,7 +114,6 @@ h2.sec-title{font-family:var(--display);font-weight:600;font-size:1.25rem;margin
 .award{display:grid;grid-template-columns:auto 1fr;gap:0 1rem;align-items:baseline}
 .award .yr{font-family:var(--display);font-weight:600;font-size:1.25rem;color:var(--c)}
 .award h3{font-size:1.02rem}.award p{margin-top:.1rem}
-.stack.awards .card{border-left:1px solid var(--line)}
 .stack.awards .yr{color:var(--ink)}
 
 /* mentees  */
@@ -125,7 +124,6 @@ h2.sec-title{font-family:var(--display);font-weight:600;font-size:1.25rem;margin
 
 /* service cards */
 .svc-cards{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
-.svc-cards .card{border-left:1px solid var(--line)}
 
 /* projects */
 .projects{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;align-items:start}
@@ -323,7 +321,7 @@ ol.pubs em{font-style:italic}
           photography.</p>
 
         <h2 class="sec-title nodot">Education</h2>
-        <div class="stack">
+        <div class="stack edu">
           <div class="card"><span class="when">2024 to present</span><h3>Ph.D., Mechanical Engineering</h3>
             <div class="role-line">Carnegie Mellon University, Robomechanics Lab</div>
             <p>Design optimization, legged locomotion, and bipedal dynamics across length scales.</p></div>
