@@ -134,22 +134,22 @@ h2.sec-title{font-family:var(--display);font-weight:600;font-size:1.25rem;margin
 .timeline-era-label .era-place{font-family:var(--display);font-size:.9rem;font-weight:600;color:var(--ink)}
 .timeline-era-label.undated .era-date,.timeline-era-label.undated .era-place{color:var(--muted)}
 .timeline-era-label.undated::before{background:var(--white);border-color:var(--faint);box-shadow:0 0 0 1px var(--faint)}
-.pcard{position:relative;display:grid;grid-template-columns:minmax(0,1fr);column-gap:1.75rem;padding:0 0 2.1rem}
+.pcard{position:relative;padding:0 0 2.1rem}
 .pcard::before{content:"";position:absolute;left:-2.29rem;top:.42rem;width:.6rem;height:.6rem;border:1.5px solid var(--faint);border-radius:50%;background:var(--white);z-index:1}
-.pcard:has(.pimg){grid-template-columns:minmax(0,1fr) 210px;align-items:start}
-.pcard .pimg{grid-column:2;grid-row:1;margin:.3rem 0 0;aspect-ratio:4/3;overflow:hidden;border:1px solid var(--line);background:var(--blue-soft)}
-.pcard .pimg img{width:100%;height:100%;object-fit:cover;display:block}
-.pcard .pimg.cad img{object-fit:contain;background:#e9edf2}
-.pcard .pimg .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:.78rem;font-family:var(--display);letter-spacing:.04em;text-align:center;padding:.5rem}
-.pcard .pbody{grid-column:1;grid-row:1;max-width:64ch}
 .pcard h3{font-family:var(--display);font-weight:600;font-size:1.08rem;line-height:1.3;margin-bottom:.3rem}
 .pcard .project-topics{font-size:.78rem;color:var(--faint);margin:0 0 .45rem}
 .pcard .project-topics strong{color:var(--muted);font-weight:600}
-.pcard p{font-size:.9rem;color:var(--muted)}
+.pcard p{font-size:.9rem;color:var(--muted);max-width:72ch}
 .pcard .link{display:inline-block;margin-top:.5rem;font-family:var(--display);font-weight:600;font-size:.8rem}
-.project-media-group{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem;margin:1rem 0 0}
+/* picture and videos share one row, same size */
+.project-media-group{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;margin:.6rem 0 1rem}
+.project-media-group:has(> :nth-child(3)){grid-template-columns:repeat(3,minmax(0,1fr))}
 .project-media-group figure{margin:0}
-.project-media-group video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--blue-soft);border:1px solid var(--line)}
+.project-media-group .pimg,.project-media-group video{display:block;width:100%;aspect-ratio:16/10;overflow:hidden;border:1px solid var(--line);background:var(--blue-soft)}
+.project-media-group .pimg img{width:100%;height:100%;object-fit:cover;display:block}
+.project-media-group .pimg.cad img{object-fit:contain;background:#e9edf2}
+.project-media-group .pimg .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:.78rem;font-family:var(--display);letter-spacing:.04em;text-align:center;padding:.5rem}
+.project-media-group video{object-fit:cover}
 .project-media-group figcaption{margin-top:.3rem;font-size:.76rem;color:var(--faint)}
 
 /* plain lists (research interests, memberships) */
@@ -242,13 +242,11 @@ ol.pubs em{font-style:italic}
   .hero{grid-template-columns:1fr}.hero .frame{max-width:260px}
   .about{grid-template-columns:1fr}.about .frame{max-width:240px}
   .cw,.svc-cards,.projects{grid-template-columns:1fr}
-  .pcard:has(.pimg){grid-template-columns:minmax(0,1fr)}
-  .pcard .pimg{grid-column:1;grid-row:1;margin:0 0 .8rem;aspect-ratio:16/9}
-  .pcard:has(.pimg) .pbody{grid-column:1;grid-row:2}
+  .project-media-group,.project-media-group:has(> :nth-child(3)){grid-template-columns:repeat(2,minmax(0,1fr))}
   .mentees{grid-template-columns:1fr 1fr}
 }
 @media(max-width:460px){
-  .project-media-group{grid-template-columns:1fr}
+  .project-media-group,.project-media-group:has(> :nth-child(3)){grid-template-columns:1fr}
   .mentees{grid-template-columns:1fr}
   .contact-list li{grid-template-columns:1fr;gap:.1rem 1rem}
 }
@@ -500,58 +498,60 @@ ol.pubs em{font-style:italic}
     <div class="projects">
       <div class="timeline-era-label ongoing"><span class="era-date">Ongoing</span><span class="era-place">Current project</span></div>
       <div class="pcard">
-        <figure class="pimg cad"><img src="images/pterosaur.png" alt="CAD model of a pterosaur-inspired robot" data-label="Pterosaur robot" onerror="imgFail(this)"></figure>
         <div class="pbody">
           <h3>Pterosaur-Inspired Robot Prototype</h3>
           <p class="project-topics"><strong>Topics:</strong> Bio-inspired robotics, CAD, Prototype testing.</p>
-          <p>Developed the CAD model using Rhamphorhynchus dimensions as a reference. Now building a prototype for a pterosaur-inspired robot with Aja Carter.</p>
           <div class="project-media-group" aria-label="Pterosaur robot video">
+            <figure class="pimg cad"><img src="images/pterosaur.png" alt="CAD model of a pterosaur-inspired robot" data-label="Pterosaur robot" onerror="imgFail(this)"></figure>
             <figure class="media-item">
-              <video controls preload="metadata" playsinline poster="images/pterosaur.png" aria-label="Pterosaur-inspired robot prototype test">
+              <video autoplay muted loop playsinline controls preload="auto" poster="images/pterosaur.png" aria-label="Pterosaur-inspired robot prototype test">
                 <source src="videos/pterosaur.mp4" type="video/mp4">
                 Your browser does not support HTML video.
               </video>
               <figcaption>Pterosaur-inspired prototype test</figcaption>
             </figure>
           </div>
+          <p>Developed the CAD model using Rhamphorhynchus dimensions as a reference. Now building a prototype for a pterosaur-inspired robot with Aja Carter.</p>
         </div>
       </div>
       <div class="timeline-era-label"><span class="era-date">2024–present</span><span class="era-place">Carnegie Mellon University</span></div>
       <div class="pcard wide">
-        <figure class="pimg"><img src="images/pengu.jpg" alt="Penguin-inspired bipedal robot" data-label="Penguin robot" onerror="imgFail(this)"></figure>
         <div class="pbody">
           <h3>Penguin-Inspired Bipedal Robot for Low-Friction Surface Walking</h3>
           <p class="project-topics"><strong>Topics:</strong> Bipedal robotics, Locomotion, Morphology.</p>
-          <p>Led end-to-end design and build of a penguin-inspired bipedal robot with six rigid bodies and five
-            Dynamixel-actuated joints. The robot uses prismatic leg extension and ellipsoidal feet with non-concentric
-            curvature centers for passive lateral stability. Developed MuJoCo-based design optimization for body
-            dimensions, implemented open-loop sinusoidal control, and trained PPO for comparison. Reached 0.165 m/s on
-            low-friction surfaces, showing that morphological design improves locomotion robustness. Validated on flat
-            ground, rough terrain, slippery surfaces, and slopes with three undergraduate mentees.</p>
           <div class="project-media-group" aria-label="Pengu robot videos">
+            <figure class="pimg"><img src="images/penguin_platform3.jpeg" alt="Penguin-inspired bipedal robot" data-label="Penguin robot" onerror="imgFail(this)"></figure>
             <figure class="media-item">
-              <video controls preload="metadata" playsinline poster="images/pengu.jpg" aria-label="Pengu bipedal robot walking test">
+              <video autoplay muted loop playsinline controls preload="auto" poster="images/penguin_platform3.jpeg" aria-label="Pengu bipedal robot walking test">
                 <source src="videos/pengu1.mp4" type="video/mp4">
                 Your browser does not support HTML video.
               </video>
               <figcaption>Pengu walking test</figcaption>
             </figure>
             <figure class="media-item">
-              <video controls preload="metadata" playsinline poster="images/pengu.jpg" aria-label="Simulation comparing Pengu gaits">
+              <video autoplay muted loop playsinline controls preload="auto" poster="images/penguin_platform3.jpeg" aria-label="Simulation comparing Pengu gaits">
                 <source src="videos/pengu2sim.mp4" type="video/mp4">
                 Your browser does not support HTML video.
               </video>
               <figcaption>Simulation: gait and surface comparison</figcaption>
             </figure>
           </div>
+          <p>Led end-to-end design and build of a penguin-inspired bipedal robot with six rigid bodies and five
+            Dynamixel-actuated joints. The robot uses prismatic leg extension and ellipsoidal feet with non-concentric
+            curvature centers for passive lateral stability. Developed MuJoCo-based design optimization for body
+            dimensions, implemented open-loop sinusoidal control, and trained PPO for comparison. Reached 0.165 m/s on
+            low-friction surfaces, showing that morphological design improves locomotion robustness. Validated on flat
+            ground, rough terrain, slippery surfaces, and slopes with three undergraduate mentees.</p>
         </div>
       </div>
 
       <div class="pcard">
-        <figure class="pimg"><img src="images/mugatu_zippy_drake.png" alt="Simulation in Drake of two quasi-passive bipedal robots" data-label="Robomechanics" onerror="imgFail(this)"></figure>
         <div class="pbody">
           <h3>Allometric Scaling Laws for Bipedal Robots</h3>
           <p class="project-topics"><strong>Topics:</strong> Bipedal robotics, Robot scaling, Dynamics.</p>
+          <div class="project-media-group">
+            <figure class="pimg"><img src="images/mugatu_zippy_drake.png" alt="Simulation in Drake of two quasi-passive bipedal robots" data-label="Robomechanics" onerror="imgFail(this)"></figure>
+          </div>
           <p>Analyzed hip-actuated bipedal walkers across scales to derive allometric scaling laws for robotic
             locomotion. Created digital twins of three robotic systems in Drake and MuJoCo for walking and morphology
             trade studies. Implemented sinusoidal and PID-based hip control across scales, optimizing leg length, foot
@@ -563,10 +563,12 @@ ol.pubs em{font-style:italic}
       </div>
 
       <div class="pcard">
-        <figure class="pimg"><img src="images/ekf-slam-map.png" alt="EKF-SLAM map" data-label="EKF-SLAM" onerror="imgFail(this)"></figure>
         <div class="pbody">
           <h3>EKF-SLAM for Mobile Robots</h3>
           <p class="project-topics"><strong>Topics:</strong> Controls, Localization, SLAM.</p>
+          <div class="project-media-group">
+            <figure class="pimg"><img src="images/ekf-slam-map.png" alt="EKF-SLAM map" data-label="EKF-SLAM" onerror="imgFail(this)"></figure>
+          </div>
           <p>Implemented Extended Kalman Filter SLAM for simultaneous localization and mapping on a mobile robot in the
             Webots simulator. Built a full state estimation pipeline with prediction and update steps and landmark
             association, handling unknown correspondence between observations and map features.</p>
@@ -594,28 +596,30 @@ ol.pubs em{font-style:italic}
       </div>
 
       <div class="pcard">
-        <figure class="pimg"><img src="images/mole-robot.png" alt="Mole digging robot" data-label="Mole robot" onerror="imgFail(this)"></figure>
         <div class="pbody">
           <h3>Mole Digging Robot with Magnetic Localization and Mapping</h3>
           <p class="project-topics"><strong>Topics:</strong> Robotics, Digging, Localization, Mapping.</p>
-          <p>Group project developing a mole-inspired digging robot with onboard magnetic localization and mapping.</p>
           <div class="project-media-group" aria-label="Mole robot video">
+            <figure class="pimg"><img src="images/mole-robot.png" alt="Mole digging robot" data-label="Mole robot" onerror="imgFail(this)"></figure>
             <figure class="media-item">
-              <video controls preload="metadata" playsinline poster="images/mole-robot.png" aria-label="Mole robot skimming test">
+              <video autoplay muted loop playsinline controls preload="auto" poster="images/mole-robot.png" aria-label="Mole robot skimming test">
                 <source src="videos/molebotskimming1.mp4" type="video/mp4">
                 Your browser does not support HTML video.
               </video>
               <figcaption>Mole robot skimming test</figcaption>
             </figure>
           </div>
+          <p>Group project developing a mole-inspired digging robot with onboard magnetic localization and mapping.</p>
         </div>
       </div>
 
       <div class="pcard">
-        <figure class="pimg"><img src="images/gan-digits.png" alt="GAN-generated digits" data-label="GAN digits" onerror="imgFail(this)"></figure>
         <div class="pbody">
           <h3>GAN for Handwritten Digit Generation</h3>
           <p class="project-topics"><strong>Topics:</strong> Generative models, GAN, Machine learning.</p>
+          <div class="project-media-group">
+            <figure class="pimg"><img src="images/gan-digits.png" alt="GAN-generated digits" data-label="GAN digits" onerror="imgFail(this)"></figure>
+          </div>
           <p>Trained a Generative Adversarial Network from scratch in PyTorch to generate realistic MNIST-style digits.
             Implemented generator and discriminator architectures with batch normalization and training-stabilization
             techniques, producing realistic samples by iteration 70,000.</p>
@@ -623,10 +627,12 @@ ol.pubs em{font-style:italic}
       </div>
 
       <div class="pcard">
-        <figure class="pimg"><img src="images/airfoil-vae.png" alt="VAE-generated airfoils" data-label="Airfoil VAE" onerror="imgFail(this)"></figure>
         <div class="pbody">
           <h3>VAE for Airfoil Shape Generation</h3>
           <p class="project-topics"><strong>Topics:</strong> Generative models, VAE, Machine learning.</p>
+          <div class="project-media-group">
+            <figure class="pimg"><img src="images/airfoil-vae.png" alt="VAE-generated airfoils" data-label="Airfoil VAE" onerror="imgFail(this)"></figure>
+          </div>
           <p>Built a Variational Autoencoder to learn a continuous latent representation of airfoil geometries from an
             engineering dataset. Sampled from the learned Gaussian distribution to generate novel, physically plausible
             airfoil profiles for design exploration.</p>
@@ -644,10 +650,12 @@ ol.pubs em{font-style:italic}
       </div>
 
       <div class="pcard">
-        <figure class="pimg"><img src="images/topology-opt.png" alt="Topology optimization result" data-label="Topology optimization" onerror="imgFail(this)"></figure>
         <div class="pbody">
           <h3>Topology Optimization with ML</h3>
           <p class="project-topics"><strong>Topics:</strong> Structural optimization, Machine learning.</p>
+          <div class="project-media-group">
+            <figure class="pimg"><img src="images/topology-opt.png" alt="Topology optimization result" data-label="Topology optimization" onerror="imgFail(this)"></figure>
+          </div>
           <p>Applied machine learning to structural topology optimization. Trained models to predict optimal material
             distributions under various loading conditions, using stress-field visualizations to evaluate structural
             performance across candidate geometries.</p>
@@ -676,10 +684,12 @@ ol.pubs em{font-style:italic}
       </div>
 
       <div class="pcard">
-        <figure class="pimg"><img src="images/detonation-engine.png" alt="Detonation engine" data-label="Detonation engine" onerror="imgFail(this)"></figure>
         <div class="pbody">
           <h3>Detonation Engine System</h3>
           <p class="project-topics"><strong>Topics:</strong> Aerospace, Propulsion, Thermodynamics.</p>
+          <div class="project-media-group">
+            <figure class="pimg"><img src="images/detonation-engine.png" alt="Detonation engine" data-label="Detonation engine" onerror="imgFail(this)"></figure>
+          </div>
           <p>Group project exploring the design and feasibility of a reusable rotating detonation engine for
             next-generation aerospace propulsion, analyzing thermodynamic cycles and structural requirements.</p>
           <a class="link" href="https://drive.google.com/drive/folders/1KyCvlTa0N6FJYXOHzGduaG54Tb87g6rO?usp=sharing" target="_blank" rel="noopener">View</a>
@@ -689,10 +699,12 @@ ol.pubs em{font-style:italic}
 
 
       <div class="pcard">
-        <figure class="pimg"><img src="images/airfoil-design.png" alt="Airfoil design" data-label="Airfoil design" onerror="imgFail(this)"></figure>
         <div class="pbody">
           <h3>Airfoil Design Project</h3>
           <p class="project-topics"><strong>Topics:</strong> Aerospace, Aerodynamics, Design.</p>
+          <div class="project-media-group">
+            <figure class="pimg"><img src="images/airfoil-design.png" alt="Airfoil design" data-label="Airfoil design" onerror="imgFail(this)"></figure>
+          </div>
           <p>Design and analysis of an airfoil, covering geometry, aerodynamic performance, and design trade-offs.</p>
           <a class="link" href="https://drive.google.com/drive/folders/197ye7ZaMMCDjMFyjUQ7vvyyKOvXtBy5f?usp=sharing" target="_blank" rel="noopener">View</a>
         </div>
@@ -717,20 +729,24 @@ ol.pubs em{font-style:italic}
       </div>
 
       <div class="pcard">
-        <figure class="pimg"><img src="images/hydrocar.jpg" alt="Hydrocar hydrogen fuel-cell car" data-label="Hydrocar" onerror="imgFail(this)"></figure>
         <div class="pbody">
           <h3>Hydrocar Technology Analysis</h3>
           <p class="project-topics"><strong>Topics:</strong> Energy systems, Sustainable mobility.</p>
+          <div class="project-media-group">
+            <figure class="pimg"><img src="images/hydrocar.jpg" alt="Hydrocar hydrogen fuel-cell car" data-label="Hydrocar" onerror="imgFail(this)"></figure>
+          </div>
           <p>A technology analysis of the Hydrocar hydrogen fuel-cell platform.</p>
           <a class="link" href="https://drive.google.com/drive/folders/1-e8nObnxd4DF9MGGmT1X-sdUPGom2-UV?usp=sharing" target="_blank" rel="noopener">View</a>
         </div>
       </div>
 
       <div class="pcard">
-        <figure class="pimg"><img src="images/solar-cooker.png" alt="Solar cooker" data-label="Solar cooker" onerror="imgFail(this)"></figure>
         <div class="pbody">
           <h3>Solar Cooker Design Project</h3>
           <p class="project-topics"><strong>Topics:</strong> Thermal design, Renewable energy.</p>
+          <div class="project-media-group">
+            <figure class="pimg"><img src="images/solar-cooker.png" alt="Solar cooker" data-label="Solar cooker" onerror="imgFail(this)"></figure>
+          </div>
           <p>Group project designing a solar cooker.</p>
           <a class="link" href="https://drive.google.com/drive/folders/18_YI2H1fLMEMleu1PdmYIK-BMK4HrfKe?usp=sharing" target="_blank" rel="noopener">View</a>
         </div>
@@ -746,10 +762,12 @@ ol.pubs em{font-style:italic}
       </div>
 
       <div class="pcard">
-        <figure class="pimg"><img src="images/rube-goldberg.png" alt="Rube Goldberg game board" data-label="Rube Goldberg" onerror="imgFail(this)"></figure>
         <div class="pbody">
           <h3>Rube Goldberg Game Board Design</h3>
           <p class="project-topics"><strong>Topics:</strong> Mechanical design, Prototyping.</p>
+          <div class="project-media-group">
+            <figure class="pimg"><img src="images/rube-goldberg.png" alt="Rube Goldberg game board" data-label="Rube Goldberg" onerror="imgFail(this)"></figure>
+          </div>
           <p>Design of a Rube Goldberg game board.</p>
           <a class="link" href="https://docs.google.com/document/d/1_tBUPnoaPVxbEum4V78wesis_AZCspb8/edit?usp=sharing&amp;ouid=103596005577173325020&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener">View</a>
         </div>
@@ -765,30 +783,36 @@ ol.pubs em{font-style:italic}
       </div>
 
       <div class="pcard">
-        <figure class="pimg"><img src="images/mobility-aid.png" alt="Bio-inspired mobility aid" data-label="Mobility aid" onerror="imgFail(this)"></figure>
         <div class="pbody">
           <h3>Bio-Inspired Mobility Aid</h3>
           <p class="project-topics"><strong>Topics:</strong> Bio-inspired design, Assistive technology.</p>
+          <div class="project-media-group">
+            <figure class="pimg"><img src="images/mobility-aid.png" alt="Bio-inspired mobility aid" data-label="Mobility aid" onerror="imgFail(this)"></figure>
+          </div>
           <p>Group project designing a bio-inspired mobility aid.</p>
           <a class="link" href="https://drive.google.com/file/d/15Zke9RVO0sIUJe6cqwfwFQMqo7HPTd97/view?usp=sharing" target="_blank" rel="noopener">View</a>
         </div>
       </div>
 
       <div class="pcard">
-        <figure class="pimg"><img src="images/flying-fish.jpg" alt="Flying-fish pectoral fins" data-label="Flying fish" onerror="imgFail(this)"></figure>
         <div class="pbody">
           <h3>Bio-Inspired Deployable Flying-Fish Pectoral Fins</h3>
           <p class="project-topics"><strong>Topics:</strong> Bio-inspired design, Deployable mechanisms.</p>
+          <div class="project-media-group">
+            <figure class="pimg"><img src="images/flying-fish.jpg" alt="Flying-fish pectoral fins" data-label="Flying fish" onerror="imgFail(this)"></figure>
+          </div>
           <p>Design and evaluation of bio-inspired deployable flying-fish pectoral fins.</p>
           <a class="link" href="https://drive.google.com/file/d/1MspT924CCQvmdWW2a-zdE36tcIp-1Z8O/view?usp=drive_link" target="_blank" rel="noopener">View</a>
         </div>
       </div>
       <div class="timeline-era-label"><span class="era-date">2018</span><span class="era-place">NASA SEES</span></div>
       <div class="pcard">
-        <figure class="pimg"><img src="images/mars-mission.jpg" alt="Mars habitat and mission design" data-label="Mars mission" onerror="imgFail(this)"></figure>
         <div class="pbody">
           <h3>Mars Habitat and Mission Design</h3>
           <p class="project-topics"><strong>Topics:</strong> Space systems, Mission design.</p>
+          <div class="project-media-group">
+            <figure class="pimg"><img src="images/mars-mission.jpg" alt="Mars habitat and mission design" data-label="Mars mission" onerror="imgFail(this)"></figure>
+          </div>
           <p>Designed a crewed Mars trip for 7 to 14 astronauts alongside NASA scientists and UT Austin faculty. Led
             habitat design, 3D modeling, cost estimates, water recycling, and the repair and emergency module.
             Presented findings at NASA Johnson Space Center.</p>
@@ -987,6 +1011,16 @@ ol.pubs em{font-style:italic}
     }
   });
   show(location.hash.slice(1)||'home');
+
+  // Start the project videos whenever the Projects page is opened
+  function playProjectVideos(){
+    if((location.hash||'').slice(1)!=='projects') return;
+    document.querySelectorAll('#projects video').forEach(function(v){
+      v.muted=true; var p=v.play(); if(p&&p.catch) p.catch(function(){});
+    });
+  }
+  window.addEventListener('hashchange',playProjectVideos);
+  playProjectVideos();
 
   function imgFail(img){
     var ph=document.createElement('div');
