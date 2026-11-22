@@ -504,7 +504,7 @@ ol.pubs em{font-style:italic}
           <div class="project-media-group" aria-label="Pterosaur robot video">
             <figure class="pimg cad"><img src="images/pterosaur.png" alt="CAD model of a pterosaur-inspired robot" data-label="Pterosaur robot" onerror="imgFail(this)"></figure>
             <figure class="media-item">
-              <video autoplay muted loop playsinline controls preload="auto" poster="images/pterosaur.png" aria-label="Pterosaur-inspired robot prototype test">
+              <video autoplay muted loop playsinline disablepictureinpicture preload="auto" poster="images/pterosaur.png" aria-label="Pterosaur-inspired robot prototype test">
                 <source src="videos/pterosaur.mp4" type="video/mp4">
                 Your browser does not support HTML video.
               </video>
@@ -522,18 +522,11 @@ ol.pubs em{font-style:italic}
           <div class="project-media-group" aria-label="Pengu robot videos">
             <figure class="pimg"><img src="images/penguin_platform3.jpeg" alt="Penguin-inspired bipedal robot" data-label="Penguin robot" onerror="imgFail(this)"></figure>
             <figure class="media-item">
-              <video autoplay muted loop playsinline controls preload="auto" poster="images/penguin_platform3.jpeg" aria-label="Pengu bipedal robot walking test">
+              <video autoplay muted loop playsinline disablepictureinpicture preload="auto" poster="images/penguin_platform3.jpeg" aria-label="Pengu bipedal robot walking test">
                 <source src="videos/pengu1.mp4" type="video/mp4">
                 Your browser does not support HTML video.
               </video>
               <figcaption>Pengu walking test</figcaption>
-            </figure>
-            <figure class="media-item">
-              <video autoplay muted loop playsinline controls preload="auto" poster="images/penguin_platform3.jpeg" aria-label="Simulation comparing Pengu gaits">
-                <source src="videos/pengu2sim.mp4" type="video/mp4">
-                Your browser does not support HTML video.
-              </video>
-              <figcaption>Simulation: gait and surface comparison</figcaption>
             </figure>
           </div>
           <p>Led end-to-end design and build of a penguin-inspired bipedal robot with six rigid bodies and five
@@ -602,7 +595,7 @@ ol.pubs em{font-style:italic}
           <div class="project-media-group" aria-label="Mole robot video">
             <figure class="pimg"><img src="images/mole-robot.png" alt="Mole digging robot" data-label="Mole robot" onerror="imgFail(this)"></figure>
             <figure class="media-item">
-              <video autoplay muted loop playsinline controls preload="auto" poster="images/mole-robot.png" aria-label="Mole robot skimming test">
+              <video autoplay muted loop playsinline disablepictureinpicture preload="auto" poster="images/mole-robot.png" aria-label="Mole robot skimming test">
                 <source src="videos/molebotskimming1.mp4" type="video/mp4">
                 Your browser does not support HTML video.
               </video>
@@ -1019,6 +1012,9 @@ ol.pubs em{font-style:italic}
       v.muted=true; var p=v.play(); if(p&&p.catch) p.catch(function(){});
     });
   }
+  document.querySelectorAll('#projects video').forEach(function(v){
+    v.addEventListener('volumechange',function(){ if(!v.muted) v.muted=true; });
+  });
   window.addEventListener('hashchange',playProjectVideos);
   playProjectVideos();
 
