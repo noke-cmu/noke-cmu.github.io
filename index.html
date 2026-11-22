@@ -147,6 +147,8 @@ h2.sec-title{font-family:var(--display);font-weight:600;font-size:1.25rem;margin
 .project-media-group figure{margin:0}
 .project-media-group .pimg,.project-media-group video{display:block;width:100%;aspect-ratio:16/10;overflow:hidden;border:1px solid var(--line);background:var(--blue-soft)}
 .project-media-group .pimg img{width:100%;height:100%;object-fit:cover;display:block}
+/* mole-robot.png holds two pictures stacked; show only the exploded view in the top part */
+.project-media-group .pimg.crop-top img{width:115%;max-width:none;height:auto;margin-left:-7.5%}
 .project-media-group .pimg.cad img{object-fit:contain;background:#e9edf2}
 .project-media-group .pimg .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:.78rem;font-family:var(--display);letter-spacing:.04em;text-align:center;padding:.5rem}
 .project-media-group video{object-fit:cover}
@@ -520,9 +522,9 @@ ol.pubs em{font-style:italic}
           <h3>Penguin-Inspired Bipedal Robot for Low-Friction Surface Walking</h3>
           <p class="project-topics"><strong>Topics:</strong> Bipedal robotics, Locomotion, Morphology.</p>
           <div class="project-media-group" aria-label="Pengu robot videos">
-            <figure class="pimg"><img src="images/penguin_platform3.jpeg" alt="Penguin-inspired bipedal robot" data-label="Penguin robot" onerror="imgFail(this)"></figure>
+            <figure class="pimg"><img src="images/pengu_platform3.jpeg" alt="Penguin-inspired bipedal robot" data-label="Penguin robot" onerror="imgFail(this)"></figure>
             <figure class="media-item">
-              <video autoplay muted loop playsinline disablepictureinpicture preload="auto" poster="images/penguin_platform3.jpeg" aria-label="Pengu bipedal robot walking test">
+              <video autoplay muted loop playsinline disablepictureinpicture preload="auto" poster="images/pengu_platform3.jpeg" aria-label="Pengu bipedal robot walking test">
                 <source src="videos/pengu1.mp4" type="video/mp4">
                 Your browser does not support HTML video.
               </video>
@@ -593,9 +595,9 @@ ol.pubs em{font-style:italic}
           <h3>Mole Digging Robot with Magnetic Localization and Mapping</h3>
           <p class="project-topics"><strong>Topics:</strong> Robotics, Digging, Localization, Mapping.</p>
           <div class="project-media-group" aria-label="Mole robot video">
-            <figure class="pimg"><img src="images/mole-robot.png" alt="Mole digging robot" data-label="Mole robot" onerror="imgFail(this)"></figure>
+            <figure class="pimg crop-top"><img src="images/mole-robot.png" alt="Mole digging robot" data-label="Mole robot" onerror="imgFail(this)"></figure>
             <figure class="media-item">
-              <video autoplay muted loop playsinline disablepictureinpicture preload="auto" poster="images/mole-robot.png" aria-label="Mole robot skimming test">
+              <video autoplay muted loop playsinline disablepictureinpicture preload="auto" aria-label="Mole robot skimming test">
                 <source src="videos/molebotskimming1.mp4" type="video/mp4">
                 Your browser does not support HTML video.
               </video>
